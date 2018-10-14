@@ -4,24 +4,30 @@
 #
 Name     : perl-Test-MockModule
 Version  : 0.15
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-0.15.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-0.15.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libtest-mockmodule-perl/libtest-mockmodule-perl_0.13-1.debian.tar.xz
 Summary  : 'Override subroutines in a module for unit testing'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0 GPL-3.0
-Requires: perl-Test-MockModule-license
-Requires: perl-Test-MockModule-man
-Requires: perl(Module::Build)
-Requires: perl(Test::Warnings)
-BuildRequires : perl(Module::Build)
+Requires: perl-Test-MockModule-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Test::Warnings)
 
 %description
 # Test::MockModule - mock subroutines in a module
 See the LICENSE section in `lib/Test/MockModule.pm` for usage and
 distribution rights.
+
+%package dev
+Summary: dev components for the perl-Test-MockModule package.
+Group: Development
+Provides: perl-Test-MockModule-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Test-MockModule package.
+
 
 %package license
 Summary: license components for the perl-Test-MockModule package.
@@ -31,19 +37,11 @@ Group: Default
 license components for the perl-Test-MockModule package.
 
 
-%package man
-Summary: man components for the perl-Test-MockModule package.
-Group: Default
-
-%description man
-man components for the perl-Test-MockModule package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Test-MockModule-0.15
-mkdir -p %{_topdir}/BUILD/Test-MockModule-0.15/deblicense/
+cd ..
+%setup -q -T -D -n Test-MockModule-0.15 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Test-MockModule-0.15/deblicense/
 
 %build
@@ -61,13 +59,13 @@ fi
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Test-MockModule
-cp LICENSE %{buildroot}/usr/share/doc/perl-Test-MockModule/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Test-MockModule/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Test-MockModule
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -76,13 +74,13 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Test/MockModule.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Test/MockModule.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-Test-MockModule/LICENSE
-/usr/share/doc/perl-Test-MockModule/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Test::MockModule.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Test-MockModule/LICENSE
+/usr/share/package-licenses/perl-Test-MockModule/deblicense_copyright
