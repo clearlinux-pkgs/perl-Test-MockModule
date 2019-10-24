@@ -4,15 +4,15 @@
 #
 Name     : perl-Test-MockModule
 Version  : 0.171.0
-Release  : 14
+Release  : 15
 URL      : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.171.0.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.171.0.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libtest-mockmodule-perl/libtest-mockmodule-perl_0.170.0-1.debian.tar.xz
 Summary  : 'Override subroutines in a module for unit testing'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-Test-MockModule-data = %{version}-%{release}
 Requires: perl-Test-MockModule-license = %{version}-%{release}
+Requires: perl-Test-MockModule-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Test::Warnings)
 
@@ -21,18 +21,9 @@ BuildRequires : perl(Test::Warnings)
 See the LICENSE section in `lib/Test/MockModule.pm` for usage and
 distribution rights.
 
-%package data
-Summary: data components for the perl-Test-MockModule package.
-Group: Data
-
-%description data
-data components for the perl-Test-MockModule package.
-
-
 %package dev
 Summary: dev components for the perl-Test-MockModule package.
 Group: Development
-Requires: perl-Test-MockModule-data = %{version}-%{release}
 Provides: perl-Test-MockModule-devel = %{version}-%{release}
 Requires: perl-Test-MockModule = %{version}-%{release}
 
@@ -46,6 +37,15 @@ Group: Default
 
 %description license
 license components for the perl-Test-MockModule package.
+
+
+%package perl
+Summary: perl components for the perl-Test-MockModule package.
+Group: Default
+Requires: perl-Test-MockModule = %{version}-%{release}
+
+%description perl
+perl components for the perl-Test-MockModule package.
 
 
 %prep
@@ -85,10 +85,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %files
 %defattr(-,root,root,-)
 
-%files data
-%defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Test/MockModule.pm
-
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Test::MockModule.3
@@ -96,3 +92,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/perl-Test-MockModule/35c343d76fd64f49397bd23062dcd3f7d3c0a6f4
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.28.2/Test/MockModule.pm
