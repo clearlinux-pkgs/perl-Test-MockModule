@@ -4,7 +4,7 @@
 #
 Name     : perl-Test-MockModule
 Version  : 0.171.0
-Release  : 15
+Release  : 16
 URL      : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.171.0.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.171.0.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libtest-mockmodule-perl/libtest-mockmodule-perl_0.170.0-1.debian.tar.xz
@@ -50,10 +50,11 @@ perl components for the perl-Test-MockModule package.
 
 %prep
 %setup -q -n Test-MockModule-v0.171.0
-cd ..
-%setup -q -T -D -n Test-MockModule-v0.171.0 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libtest-mockmodule-perl_0.170.0-1.debian.tar.xz
+cd %{_builddir}/Test-MockModule-v0.171.0
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Test-MockModule-v0.171.0/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Test-MockModule-v0.171.0/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -72,6 +73,7 @@ fi
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Test-MockModule
 cp %{_builddir}/Test-MockModule-v0.171.0/LICENSE %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/35c343d76fd64f49397bd23062dcd3f7d3c0a6f4
+cp %{_builddir}/Test-MockModule-v0.171.0/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/df4957f7d747e74e0bfa20d6b99a2fac98bb9753
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -92,7 +94,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/perl-Test-MockModule/35c343d76fd64f49397bd23062dcd3f7d3c0a6f4
+/usr/share/package-licenses/perl-Test-MockModule/df4957f7d747e74e0bfa20d6b99a2fac98bb9753
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Test/MockModule.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Test/MockModule.pm
