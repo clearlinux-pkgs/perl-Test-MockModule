@@ -4,11 +4,11 @@
 #
 Name     : perl-Test-MockModule
 Version  : 0.172.0
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.172.0.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.172.0.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libtest-mockmodule-perl/libtest-mockmodule-perl_0.170.0-1.debian.tar.xz
-Summary  : Override subroutines in a module for unit testing
+Summary  : 'Override subroutines in a module for unit testing'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Test-MockModule-license = %{version}-%{release}
@@ -25,7 +25,6 @@ distribution rights.
 Summary: dev components for the perl-Test-MockModule package.
 Group: Development
 Provides: perl-Test-MockModule-devel = %{version}-%{release}
-Requires: perl-Test-MockModule = %{version}-%{release}
 Requires: perl-Test-MockModule = %{version}-%{release}
 
 %description dev
@@ -73,7 +72,8 @@ fi
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Test-MockModule
-cp %{_builddir}/Test-MockModule-v0.172.0/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/df4957f7d747e74e0bfa20d6b99a2fac98bb9753
+cp %{_builddir}/Test-MockModule-v0.172.0/LICENSE %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/84cb5dbf9d7b11631985795af75799605afec051
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Test-MockModule/df4957f7d747e74e0bfa20d6b99a2fac98bb9753
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -93,8 +93,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Test-MockModule/84cb5dbf9d7b11631985795af75799605afec051
 /usr/share/package-licenses/perl-Test-MockModule/df4957f7d747e74e0bfa20d6b99a2fac98bb9753
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Test/MockModule.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Test/MockModule.pm
