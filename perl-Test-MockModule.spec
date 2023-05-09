@@ -5,7 +5,7 @@
 #
 Name     : perl-Test-MockModule
 Version  : 0.177.0
-Release  : 28
+Release  : 29
 URL      : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.177.0.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.177.0.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libt/libtest-mockmodule-perl/libtest-mockmodule-perl_0.170.0-1.debian.tar.xz
