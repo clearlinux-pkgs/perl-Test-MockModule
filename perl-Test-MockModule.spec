@@ -7,7 +7,7 @@
 #
 Name     : perl-Test-MockModule
 Version  : 0.179.0
-Release  : 34
+Release  : 35
 URL      : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.179.0.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GF/GFRANKS/Test-MockModule-v0.179.0.tar.gz
 Summary  : 'Override subroutines in a module for unit testing'
